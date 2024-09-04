@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: LearningKafka
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092,localhost:9094,localhost:9096
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      retries: 10                   #The number of attempts to send a message
+      properties:
+        retry.backoff.ms: 1000      #The interval for sending attempts
+        delivery.timeout.ms: 60000  #The max time for all attempts to send
+        linger.ms: 0                #The time during which we collect messages for group sending
+        request.timeout.ms: 30000   #Maximum time between message and response
+        enable.idempotence: true    #Doesn't allow to add the same message twice if the success response has not reached the producer
+      acks: all #0 - not waiting for an answer
+                #1 - waiting for a response from the leader
+                #n - from the leader and (n-1) replicas
+                #all - from all min-insync-replicas
+
+server:
+  port: 8081
