@@ -53,7 +53,6 @@ public class KafkaConfig {
         props.put(ProducerConfig.LINGER_MS_CONFIG, lingerMs);
         props.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, requestTimeoutMs);
 
-
         return props;
     }
 
